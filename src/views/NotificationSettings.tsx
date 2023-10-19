@@ -65,12 +65,12 @@ function NotificationSettings() {
   });
 
   return (
-    <div className='nhsuk-u-width-two-thirds'>
+    <div className='nhsuk-u-width-full'>
       <h1 className='nhsuk-heading-l' data-test-id='heading-one'>
         SDCS Cloud Notification Management
       </h1>
       <p className='nhsuk-body' data-test-id='welcome-text'>
-        Select the notification you want to receive to your registered email account
+        Select the notification you want to receive to the email registered to your account
       </p>
       <Fieldset aria-describedby='notification--hint'>
         <Fieldset.Legend>
