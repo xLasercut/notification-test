@@ -74,18 +74,18 @@ function NotificationSettings() {
       </p>
       <Fieldset aria-describedby='notification--hint'>
         <Fieldset.Legend>
-          <h5>Notify me when:</h5>
+          <b>Notify me when:</b>
         </Fieldset.Legend>
-        <Checkboxes id='notification' name='notification'>
+        <Checkboxes id='notification' hint='Select all that apply' name='notification'>
           {notifications}
         </Checkboxes>
       </Fieldset>
 
       <Fieldset aria-describedby='notification-mid-window--hint'>
         <Fieldset.Legend>
-          <h5>Notifications that apply to the Maternity Data Service Collection only</h5>
+          <b>Notifications that apply to the Maternity Data Service Collection only</b>
         </Fieldset.Legend>
-        <Checkboxes id='notification-mid-window' name='notification-mid-window'>
+        <Checkboxes id='notification-mid-window' hint='Select all that apply' name='notification-mid-window'>
           {msdsNotifications}
         </Checkboxes>
       </Fieldset>
