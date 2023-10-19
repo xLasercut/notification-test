@@ -4,17 +4,17 @@ function HeaderComponent() {
   return (
     <Header>
       <Header.Container>
-        <Header.Logo href='/' />
-        <Header.ServiceName href='/'>Strategic Data Collection Service</Header.ServiceName>
+        <Header.Logo href='/notification-test/' />
+        <Header.ServiceName href='/notification-test/'>Strategic Data Collection Service</Header.ServiceName>
       </Header.Container>
       <Header.Nav>
-        <Header.NavItem href='/' mobileOnly>
+        <Header.NavItem href='/notification-test/' mobileOnly>
           Home
         </Header.NavItem>
-        <Header.NavItem href='/'>Home</Header.NavItem>
-        <Header.NavItem href='/'>Submit a File</Header.NavItem>
-        <Header.NavItem href='/'>Submission History</Header.NavItem>
-        <Header.NavItem href='/notification-settings'>Notification Settings</Header.NavItem>
+        <Header.NavItem href='/notification-test/'>Home</Header.NavItem>
+        <Header.NavItem href='/notification-test/'>Submit a File</Header.NavItem>
+        <Header.NavItem href='/notification-test/'>Submission History</Header.NavItem>
+        <Header.NavItem href='/notification-test/notification-settings'>Notification Settings</Header.NavItem>
       </Header.Nav>
     </Header>
   );

@@ -4,11 +4,11 @@ import NotificationSettings from '../views/NotificationSettings.tsx';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/notification-test/',
     element: <Home />,
   },
   {
-    path: '/notification-settings',
+    path: '/notification-test/notification-settings',
     element: <NotificationSettings></NotificationSettings>,
   },
 ]);
