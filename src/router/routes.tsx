@@ -1,15 +1,22 @@
 import {createBrowserRouter} from 'react-router-dom';
-import Home from '../views/Home.tsx';
 import NotificationSettings from '../views/NotificationSettings.tsx';
+import App from '../App.tsx';
+import Home from '../views/Home.tsx';
 
 const router = createBrowserRouter([
   {
     path: '/notification-test/',
-    element: <Home />,
-  },
-  {
-    path: '/notification-test/notification-settings',
-    element: <NotificationSettings></NotificationSettings>,
+    element: <App />,
+    children: [
+      {
+        path: '/notification-test/',
+        element: <Home></Home>,
+      },
+      {
+        path: '/notification-test/notification-settings',
+        element: <NotificationSettings></NotificationSettings>,
+      },
+    ],
   },
 ]);
 
