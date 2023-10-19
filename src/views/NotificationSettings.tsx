@@ -1,13 +1,68 @@
 import {useNavigate} from 'react-router-dom';
 import {Button, Checkboxes, Fieldset} from 'nhsuk-react-components';
+import {useContext, useState} from 'react';
+import {
+  NotificationSettingsContext,
+  INotificationSettings,
+} from '../context/NotificationSettingsContext.tsx';
 
 function NotificationSettings() {
   const navigate = useNavigate();
 
+  const [parentNotificationSettings, setParentNotificationSettings] = useContext(
+    NotificationSettingsContext
+  );
+  const [notificationSettings, setNotificationSettings] = useState<INotificationSettings>(
+    parentNotificationSettings
+  );
+
   function saveSettings(e: React.MouseEvent) {
     e.preventDefault();
+    setParentNotificationSettings(notificationSettings);
     navigate('/notification-test/');
   }
+
+  const NORMAL_NOTIFICATIONS: {[key: string]: string} = {
+    submissionWindowOpen: 'A collection submission window is open',
+    submissionWindowClose: 'A collection submission window is due to close',
+    submissionProcessed: 'The submission file has been processed',
+    submissionSummaryReady: 'The submission summary extract is now available for download',
+    postDeadlineReady: 'The post-deadline submission extract is ready for request',
+    extractCanBeDownloaded: 'A requested submission extract is available for download',
+  };
+
+  const MSDS_NOTIFICATIONS: {[key: string]: string} = {
+    midWindowClose: 'Provisional processing deadline for submission extracts is due',
+    midWindowReady: 'Provisional processing submission extracts are ready for request',
+  };
+
+  const notifications = Object.keys(NORMAL_NOTIFICATIONS).map(key => {
+    function updateFilter() {
+      const updatedSettings = {...notificationSettings};
+      updatedSettings[key] = !updatedSettings[key];
+      setNotificationSettings(updatedSettings);
+    }
+
+    return (
+      <Checkboxes.Box key={key} checked={notificationSettings[key]} onChange={updateFilter}>
+        {NORMAL_NOTIFICATIONS[key]}
+      </Checkboxes.Box>
+    );
+  });
+
+  const msdsNotifications = Object.keys(MSDS_NOTIFICATIONS).map(key => {
+    function updateFilter() {
+      const updatedSettings = {...notificationSettings};
+      updatedSettings[key] = !updatedSettings[key];
+      setNotificationSettings(updatedSettings);
+    }
+
+    return (
+      <Checkboxes.Box key={key} checked={notificationSettings[key]} onChange={updateFilter}>
+        {MSDS_NOTIFICATIONS[key]}
+      </Checkboxes.Box>
+    );
+  });
 
   return (
     <div className='nhsuk-u-width-two-thirds'>
@@ -22,24 +77,7 @@ function NotificationSettings() {
           <h5>Notify me when:</h5>
         </Fieldset.Legend>
         <Checkboxes id='notification' name='notification'>
-          <Checkboxes.Box value='submission_window_open'>
-            A collection submission window is open
-          </Checkboxes.Box>
-          <Checkboxes.Box value='submission_window_close'>
-            A collection submission window is due to close
-          </Checkboxes.Box>
-          <Checkboxes.Box value='submission_processed'>
-            The submission file has been processed
-          </Checkboxes.Box>
-          <Checkboxes.Box value='submission_summary_ready'>
-            The submission summary extract is now available for download
-          </Checkboxes.Box>
-          <Checkboxes.Box value='post_deadline_ready'>
-            The post-deadline submission extract is ready for request
-          </Checkboxes.Box>
-          <Checkboxes.Box value='extract_can_be_downloaded'>
-            A requested submission extract is available for download
-          </Checkboxes.Box>
+          {notifications}
         </Checkboxes>
       </Fieldset>
 
@@ -48,12 +86,7 @@ function NotificationSettings() {
           <h5>Notifications that apply to the Maternity Data Service Collection only</h5>
         </Fieldset.Legend>
         <Checkboxes id='notification-mid-window' name='notification-mid-window'>
-          <Checkboxes.Box value='mid_window_close'>
-            Provisional processing deadline for submission extracts is due
-          </Checkboxes.Box>
-          <Checkboxes.Box value='mid_window_ready'>
-            Provisional processing submission extracts are ready for request
-          </Checkboxes.Box>
+          {msdsNotifications}
         </Checkboxes>
       </Fieldset>
 
