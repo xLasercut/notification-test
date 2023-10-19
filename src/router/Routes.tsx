@@ -1,9 +1,9 @@
-import {createHashRouter} from 'react-router-dom';
+import {createBrowserRouter} from 'react-router-dom';
 import NotificationSettings from '../views/NotificationSettings.tsx';
 import App from '../App.tsx';
 import Home from '../views/Home.tsx';
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
     path: '/notification-test/',
     element: <App />,
